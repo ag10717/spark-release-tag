@@ -46,6 +46,8 @@ async function run() {
 
 		const bump = BumpType[bumpType as keyof typeof BumpType]
 		const newVersion = bumpVersion(bump, latestVersion)
+		execSync('git config user.email "alex.girardi@rac.com.au"')
+		execSync('git config user.name "Alex Girardi"')
 
 		execSync(`git tag -a "v${newVersion}" -m "v${newVersion}"`);
 		execSync(`git push origin "v${newVersion}"`);
