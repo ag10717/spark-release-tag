@@ -30,9 +30,9 @@ try {
 	core.info(`got bumpType: ${bumpType}`)
 
 	switch (bumpType) {
-		case bumpType == "major":
+		case "major":
 			newTag = largestTag + 1
-		case bumpType == "minor":
+		case "minor":
 			newTag = largestTag + .1
 	}
 
