@@ -2,6 +2,10 @@ import * as core from "@actions/core"
 import { execSync } from "node:child_process"
 
 try {
+	// set a committer for testing
+	execSync(`git config user.name "Alex Girardi"`)
+	execSync(`git config user.email "alex.girardi@rac.com.au"`)
+
 	core.info(process.cwd())
 	const tagListCmd = execSync("git tag -l")
 
