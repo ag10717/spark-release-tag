@@ -42,8 +42,8 @@ try {
 		core.info("no new tag to create")
 		core.ExitCode.Success
 	} else {
-		execSync(`git tag -a ${newTag} -m ${newTag}`)
-		execSync(`git push origin ${newTag}`)
+		execSync(`git tag -a "v${newTag}" -m "v${newTag}"`)
+		execSync(`git push origin "v${newTag}"`)
 
 		core.info(`created new tag: ${newTag}`)
 	}
