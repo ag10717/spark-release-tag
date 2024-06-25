@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
-    "build": "npx ncc build src/index.ts -o dist --source-map"
+    "build": "npx ncc build src/index.ts -o dist --source-map",
+    "package": "npx ncc build src/index.ts -o dist --source-map"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0"
