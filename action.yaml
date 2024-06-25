@@ -1,0 +1,8 @@
+name: Spark Release Tag
+inputs:
+  bump_type:
+    default: "minor"
+
+runs:
+  using: "node20"
+  main: "index.js"
