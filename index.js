@@ -29,7 +29,7 @@ try {
 
 	if (newTag == largestTag) {
 		core.info("no new tag to create")
-		return core.ExitCode.Success
+		core.ExitCode.Success
 	}
 
 	execSync(`git tag -a ${newTag} -m ${newTag}`)
