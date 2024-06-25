@@ -1,0 +1,39 @@
+name: Build Action
+run-name: Build Action
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write # Required for the azure login action
+  checks: write # Required for test-reporter action
+
+jobs:
+  build-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        id: setup-node
+        uses: actions/setup-node@v4
+
+      - name: Install Dependencies
+        id: install
+        run: npm ci
+
+      - name: Build
+        id: build
+        run: npm run build
+
+      - name: Upload Action
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
