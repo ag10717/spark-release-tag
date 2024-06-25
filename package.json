@@ -2,9 +2,7 @@
   "name": "spark-release-tag",
   "version": "1.0.0",
   "description": "",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "./dist/index.js",
   "scripts": {
     "build": "npx ncc build src/index.ts -o dist --source-map"
   },

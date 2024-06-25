@@ -2,9 +2,7 @@ name: Spark Release Tag
 inputs:
   bump_type:
     default: "minor"
-  is_local:
-    default: "false"
 
 runs:
   using: "node20"
-  main: "index.js"
+  main: "./dist/index.js"
