@@ -23,8 +23,12 @@ try {
 		}
 	}
 
+	core.info(`found largestTag: ${largestTag}`)
+
 	let newTag
 	let bumpType = core.getInput("bump_type")
+	core.info(`got bumpType: ${bumpType}`)
+
 	switch (bumpType) {
 		case bumpType == "major":
 			newTag = largestTag + 1
@@ -32,15 +36,17 @@ try {
 			newTag = largestTag + .1
 	}
 
+	core.info(`using new tag: ${newTag}`)
+
 	if (newTag == largestTag) {
 		core.info("no new tag to create")
 		core.ExitCode.Success
+	} else {
+		execSync(`git tag -a ${newTag} -m ${newTag}`)
+		execSync(`git push origin ${newTag}`)
+
+		core.info(`created new tag: ${newTag}`)
 	}
-
-	execSync(`git tag -a ${newTag} -m ${newTag}`)
-	execSync(`git push origin ${newTag}`)
-
-	core.info(`created new tag: ${newTag}`)
 } catch (err) {
 	core.setFailed(err)
 }
