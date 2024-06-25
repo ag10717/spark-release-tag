@@ -1,24 +1,25 @@
 import * as core from "@actions/core"
 import { execSync } from "node:child_process"
 
-const tagListCmd = execSync("git tag -l")
-
-let tagList = tagListCmd.toString().split("\n")
-tagList = tagList.filter(tag => tag)
-
-// find latest
-const subbedList = tagList.map(tag => tag.substring(1, tag.length))
-
-let largestTag = 0.0
-for (const subbed of subbedList) {
-	const numberSubbed = parseFloat(subbed)
-	if (numberSubbed >= largestTag) {
-		largestTag = subbed
-	}
-}
-
-let newTag
 try {
+	core.info(process.cwd())
+	const tagListCmd = execSync("git tag -l")
+
+	let tagList = tagListCmd.toString().split("\n")
+	tagList = tagList.filter(tag => tag)
+
+	// find latest
+	const subbedList = tagList.map(tag => tag.substring(1, tag.length))
+
+	let largestTag = 0.0
+	for (const subbed of subbedList) {
+		const numberSubbed = parseFloat(subbed)
+		if (numberSubbed >= largestTag) {
+			largestTag = subbed
+		}
+	}
+
+	let newTag
 	let bumpType = core.getInput("bump_type")
 	switch (bumpType) {
 		case bumpType == "major":
