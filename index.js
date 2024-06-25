@@ -31,9 +31,9 @@ try {
 
 	switch (bumpType) {
 		case "major":
-			newTag = largestTag + 1
+			newTag = (parseFloat(largestTag) + 1)
 		case "minor":
-			newTag = largestTag + .1
+			newTag = (parseFloat(largestTag) + .1)
 	}
 
 	core.info(`using new tag: ${newTag}`)
