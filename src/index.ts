@@ -6,10 +6,10 @@ enum BumpType {
 	MINOR = "minor"
 }
 
-const bumpVersion = (bumpType: BumpType, currentVersion: number): number | void => {
+const bumpVersion = (bumpType: string, currentVersion: number): number | void => {
 	core.info(`Detected BumpType: ${bumpType}`)
 
-	if (bumpType == BumpType.MAJOR) {
+	if (BumpType.MAJOR == bumpType) {
 		const version = currentVersion + 1
 
 		core.info(`Bumping to Version: ${version}`)
@@ -17,7 +17,7 @@ const bumpVersion = (bumpType: BumpType, currentVersion: number): number | void 
 		return version
 	}
 
-	if (bumpType == BumpType.MINOR) {
+	if (BumpType.MINOR == bumpType) {
 		const version = currentVersion + .1
 
 		core.info(`Bumping to Version: ${version}`)
@@ -44,8 +44,7 @@ async function run() {
 		const bumpType = core.getInput("bump_type")
 		const latestVersion = getLatestVersion()
 
-		const bump = BumpType[bumpType as keyof typeof BumpType]
-		const newVersion = bumpVersion(bump, latestVersion)
+		const newVersion = bumpVersion(bumpType, latestVersion)
 		execSync('git config user.email "alex.girardi@rac.com.au"')
 		execSync('git config user.name "Alex Girardi"')
 
