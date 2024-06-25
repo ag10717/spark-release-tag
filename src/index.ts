@@ -41,17 +41,24 @@ const getLatestVersion = (): number => {
 
 async function run() {
 	try {
-		const bumpType = core.getInput("bump_type")
-		const latestVersion = getLatestVersion()
+		const isLocal = core.getInput("local_run")
+		if (isLocal == "true") {
+			core.info("You have run this locally to ensure it's working condition")
+			core.ExitCode.Success
+		} else {
+			const bumpType = core.getInput("bump_type")
+			const latestVersion = getLatestVersion()
 
-		const bump = BumpType[bumpType as keyof typeof BumpType]
-		const newVersion = bumpVersion(bump, latestVersion)
+			const bump = BumpType[bumpType as keyof typeof BumpType]
+			const newVersion = bumpVersion(bump, latestVersion)
 
-		execSync(`git tag -a "v${newVersion}" -m "v${newVersion}"`);
-		execSync(`git push origin "v${newVersion}"`);
+			execSync(`git tag -a "v${newVersion}" -m "v${newVersion}"`);
+			execSync(`git push origin "v${newVersion}"`);
 
-		core.info(`Pushed New Version: ${newVersion}`)
-		core.ExitCode.Success
+			core.info(`Pushed New Version: ${newVersion}`)
+			core.ExitCode.Success
+		}
+
 	} catch (err) {
 		core.setFailed("Failed to Create New Version")
 	}
